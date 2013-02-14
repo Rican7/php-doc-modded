@@ -296,9 +296,9 @@ endfunc
 " }}}
 
 " {{{ PhpDocClassEnd()
-func! PhpDocClassEnd()
+func! PhpDocClassEnd(classtype, classname)
 
-	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd)
+	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
 endfunc
 " }}}
 " {{{ PhpDocClassEndAuto()
@@ -306,7 +306,7 @@ func! PhpDocClassEndAuto(classtype, classname)
 
 	call search('{')
 	call searchpair('{', '', '}')
-	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
+	return PhpDocClassEnd(a:classtype, a:classname)
 
 endfunc
 " }}}
