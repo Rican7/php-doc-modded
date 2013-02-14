@@ -90,7 +90,8 @@ let g:pdv_cfg_Comment1 = " * "
 let g:pdv_cfg_Commentn = " * "
 let g:pdv_cfg_CommentTail = " */"
 let g:pdv_cfg_CommentSingle = "//"
-let g:pdv_cfg_CommentEnd = " // End function"
+let g:pdv_cfg_FuncCommentEnd = " // End function"
+let g:pdv_cfg_ClassCommentEnd = " // End"
 
 " Default values
 let g:pdv_cfg_Type = "mixed"
@@ -108,6 +109,9 @@ let g:pdv_cfg_Uses = 1
 " Options
 " Whether or not to automatically add the function end comment (1|0)
 let g:pdv_cfg_autoEndFunction = 1
+
+" Whether or not to automatically add the class end comment (1|0)
+let g:pdv_cfg_autoEndClass = 1
 
 " :set paste before documenting (1|0)? Recommended.
 let g:pdv_cfg_paste = 1
@@ -278,7 +282,7 @@ endfunc
 " {{{ PhpDocFuncEnd()
 func! PhpDocFuncEnd()
 
-	call setline(line('.'), getline('.') . g:pdv_cfg_CommentEnd)
+	call setline(line('.'), getline('.') . g:pdv_cfg_FuncCommentEnd)
 endfunc
 " }}}
 " {{{ PhpDocFuncEndAuto()
@@ -286,7 +290,23 @@ func! PhpDocFuncEndAuto(funcname)
 
 	call search('{')
 	call searchpair('{', '', '}')
-	call setline(line('.'), getline('.') . g:pdv_cfg_CommentEnd . ' ' . a:funcname)
+	call setline(line('.'), getline('.') . g:pdv_cfg_FuncCommentEnd . ' ' . a:funcname)
+
+endfunc
+" }}}
+
+" {{{ PhpDocClassEnd()
+func! PhpDocClassEnd()
+
+	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd)
+endfunc
+" }}}
+" {{{ PhpDocClassEndAuto()
+func! PhpDocClassEndAuto(classtype, classname)
+
+	call search('{')
+	call searchpair('{', '', '}')
+	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
 
 endfunc
 " }}}
@@ -373,6 +393,8 @@ func! PhpDocFunc()
 
 	if g:pdv_cfg_autoEndFunction == 1
 		return l:modifier ." ". l:funcname . PhpDocFuncEndAuto(l:funcname)
+	else
+		return l:modifier ." ". l:funcname
 	endif
 endfunc
 
@@ -483,6 +505,7 @@ func! PhpDocClass()
     let l:indent = matchstr(l:name, g:pdv_re_indent)
 	
 	let l:modifier = substitute (l:name, g:pdv_re_class, '\1', "g")
+	let l:classtype = substitute (l:name, g:pdv_re_class, '\2', "g")
 	let l:classname = substitute (l:name, g:pdv_re_class, '\3', "g")
 	let l:extends = g:pdv_cfg_Uses == 1 ? substitute (l:name, g:pdv_re_class, '\5', "g") : ""
 	let l:interfaces = g:pdv_cfg_Uses == 1 ? substitute (l:name, g:pdv_re_class, '\7', "g") . "," : ""
@@ -524,7 +547,12 @@ func! PhpDocClass()
 
 	" Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
-	return l:modifier ." ". l:classname
+
+	if g:pdv_cfg_autoEndClass == 1
+		return l:modifier ." ". l:classname . PhpDocClassEndAuto(l:classtype, l:classname)
+	else
+		return l:modifier ." ". l:classname
+	endif
 endfunc
 
 " }}} 
