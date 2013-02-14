@@ -7,6 +7,8 @@
 " Inspired by phpDoc script for Vim by Vidyut Luther (http://www.phpcult.com/).
 "
 " modified by kevin olson (acidjazz@gmail.com)
+"
+" FURTHER modified by Trevor Suarez (Rican7) <rican7@gmail.com>
 
 
 " Provided under the GPL (http://www.gnu.org/copyleft/gpl.html).
