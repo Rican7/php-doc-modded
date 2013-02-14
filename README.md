@@ -1,4 +1,12 @@
-# Below is the original README information from http://www.vim.org/scripts/script.php?script_id=1355
+# PHP-Doc-Modded
+
+The original plugin (information below) was **wonderful**.. unfortunately it has some issues but is no longer supported by the original developer.
+
+Here's my modified version. :kthxbye:
+
+
+Below is the original README information from http://www.vim.org/scripts/script.php?script_id=1355
+------------------- 
 
 PDV (phpDocumentor for Vim) 
 ======================== 
