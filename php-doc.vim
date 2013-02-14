@@ -88,7 +88,7 @@ let g:pdv_cfg_Comment1 = " * "
 let g:pdv_cfg_Commentn = " * "
 let g:pdv_cfg_CommentTail = " */"
 let g:pdv_cfg_CommentSingle = "//"
-let g:pdv_cfg_CommentEnd = "// }" . "}" . "}"
+let g:pdv_cfg_CommentEnd = " // End function"
 
 " Default values
 let g:pdv_cfg_Type = "mixed"
@@ -104,6 +104,9 @@ let g:pdv_cfg_ReturnVal = "void"
 let g:pdv_cfg_Uses = 1
 
 " Options
+" Whether or not to automatically add the function end comment (1|0)
+let g:pdv_cfg_autoEndFunction = 1
+
 " :set paste before documenting (1|0)? Recommended.
 let g:pdv_cfg_paste = 1
 
@@ -277,12 +280,11 @@ func! PhpDocFuncEnd()
 endfunc
 " }}}
 " {{{ PhpDocFuncEndAuto()
-func! PhpDocFuncEndAuto()
-
+func! PhpDocFuncEndAuto(funcname)
 
 	call search('{')
 	call searchpair('{', '', '}')
-	call append(line('.'), matchstr(getline('.'), '^\s*') . g:pdv_cfg_CommentEnd)
+	call setline(line('.'), getline('.') . g:pdv_cfg_CommentEnd . ' ' . a:funcname)
 
 endfunc
 " }}}
@@ -367,7 +369,9 @@ func! PhpDocFunc()
 	" Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
 
-  return l:modifier ." ". l:funcname . PhpDocFuncEndAuto()
+	if g:pdv_cfg_autoEndFunction == 1
+		return l:modifier ." ". l:funcname . PhpDocFuncEndAuto(l:funcname)
+	endif
 endfunc
 
 " }}}  
