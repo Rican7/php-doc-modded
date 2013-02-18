@@ -98,7 +98,7 @@ if !exists('g:pdv_cfg_Type') | let g:pdv_cfg_Type = "mixed" | endif
 if !exists('g:pdv_cfg_Package') | let g:pdv_cfg_Package = "" | endif
 if !exists('g:pdv_cfg_Version') | let g:pdv_cfg_Version = "$id$" | endif
 if !exists('g:pdv_cfg_Author') | let g:pdv_cfg_Author = "Trevor Suarez <rican7@gmail.com>" | endif
-if !exists('g:pdv_cfg_Copyright') | let g:pdv_cfg_Copyright = "2013 Blennd" | endif
+if !exists('g:pdv_cfg_Copyright') | let g:pdv_cfg_Copyright = strftime('%Y') . " Blennd" | endif
 if !exists('g:pdv_cfg_License') | let g:pdv_cfg_License = "PHP Version 5.4 {@link http://www.php.net/license/}" | endif
 
 if !exists('g:pdv_cfg_ReturnVal') | let g:pdv_cfg_ReturnVal = "void" | endif
