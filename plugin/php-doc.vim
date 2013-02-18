@@ -85,47 +85,47 @@ if has ("user_commands")
 " {{{ Globals
 
 " After phpDoc standard
-let g:pdv_cfg_CommentHead = "/**"
-let g:pdv_cfg_Comment1 = " * "
-let g:pdv_cfg_Commentn = " * "
-let g:pdv_cfg_CommentTail = " */"
-let g:pdv_cfg_CommentSingle = "//"
-let g:pdv_cfg_FuncCommentEnd = " // End function"
-let g:pdv_cfg_ClassCommentEnd = " // End"
+if !exists('g:pdv_cfg_CommentHead') | let g:pdv_cfg_CommentHead = "/**" | endif
+if !exists('g:pdv_cfg_Comment1') | let g:pdv_cfg_Comment1 = " * " | endif
+if !exists('g:pdv_cfg_Commentn') | let g:pdv_cfg_Commentn = " * " | endif
+if !exists('g:pdv_cfg_CommentTail') | let g:pdv_cfg_CommentTail = " */" | endif
+if !exists('g:pdv_cfg_CommentSingle') | let g:pdv_cfg_CommentSingle = "//" | endif
+if !exists('g:pdv_cfg_FuncCommentEnd') | let g:pdv_cfg_FuncCommentEnd = " // End function" | endif
+if !exists('g:pdv_cfg_ClassCommentEnd') | let g:pdv_cfg_ClassCommentEnd = " // End" | endif
 
 " Default values
-let g:pdv_cfg_Type = "mixed"
-let g:pdv_cfg_Package = ""
-let g:pdv_cfg_Version = "$id$"
-let g:pdv_cfg_Author = "Trevor Suarez <rican7@gmail.com>"
-let g:pdv_cfg_Copyright = "2013 Blennd"
-let g:pdv_cfg_License = "PHP Version 5.4 {@link http://www.php.net/license/}"
+if !exists('g:pdv_cfg_Type') | let g:pdv_cfg_Type = "mixed" | endif
+if !exists('g:pdv_cfg_Package') | let g:pdv_cfg_Package = "" | endif
+if !exists('g:pdv_cfg_Version') | let g:pdv_cfg_Version = "$id$" | endif
+if !exists('g:pdv_cfg_Author') | let g:pdv_cfg_Author = "Trevor Suarez <rican7@gmail.com>" | endif
+if !exists('g:pdv_cfg_Copyright') | let g:pdv_cfg_Copyright = "2013 Blennd" | endif
+if !exists('g:pdv_cfg_License') | let g:pdv_cfg_License = "PHP Version 5.4 {@link http://www.php.net/license/}" | endif
 
-let g:pdv_cfg_ReturnVal = "void"
+if !exists('g:pdv_cfg_ReturnVal') | let g:pdv_cfg_ReturnVal = "void" | endif
 
 " Wether to create @uses tags for implementation of interfaces and inheritance
-let g:pdv_cfg_Uses = 1
+if !exists('g:pdv_cfg_Uses') | let g:pdv_cfg_Uses = 1 | endif
 
 " Options
 " Whether or not to automatically add the function end comment (1|0)
-let g:pdv_cfg_autoEndFunction = 1
+if !exists('g:pdv_cfg_autoEndFunction') | let g:pdv_cfg_autoEndFunction = 1 | endif
 
 " Whether or not to automatically add the class end comment (1|0)
-let g:pdv_cfg_autoEndClass = 1
+if !exists('g:pdv_cfg_autoEndClass') | let g:pdv_cfg_autoEndClass = 1 | endif
 
 " :set paste before documenting (1|0)? Recommended.
-let g:pdv_cfg_paste = 1
+if !exists('g:pdv_cfg_paste') | let g:pdv_cfg_paste = 1 | endif
 
 " Wether for PHP5 code PHP4 tags should be set, like @access,... (1|0)?
-let g:pdv_cfg_php4always = 1
+if !exists('g:pdv_cfg_php4always') | let g:pdv_cfg_php4always = 1 | endif
  
 " Wether to guess scopes after PEAR coding standards:
 " $_foo/_bar() == <private|protected> (1|0)?
-let g:pdv_cfg_php4guess = 1
+if !exists('g:pdv_cfg_php4guess') | let g:pdv_cfg_php4guess = 1 | endif
 
 " If you selected 1 for the last value, this scope identifier will be used for
 " the identifiers having an _ in the first place.
-let g:pdv_cfg_php4guessval = "protected"
+if !exists('g:pdv_cfg_php4guessval') | let g:pdv_cfg_php4guessval = "protected" | endif
 
 "
 " Regular expressions 
