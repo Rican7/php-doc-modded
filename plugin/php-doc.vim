@@ -88,6 +88,7 @@ if has ("user_commands")
 if !exists('g:pdv_cfg_CommentHead') | let g:pdv_cfg_CommentHead = "/**" | endif
 if !exists('g:pdv_cfg_Comment1') | let g:pdv_cfg_Comment1 = " * " | endif
 if !exists('g:pdv_cfg_Commentn') | let g:pdv_cfg_Commentn = " * " | endif
+if !exists('g:pdv_cfg_CommentBlank') | let g:pdv_cfg_CommentBlank = " *" | endif
 if !exists('g:pdv_cfg_CommentTail') | let g:pdv_cfg_CommentTail = " */" | endif
 if !exists('g:pdv_cfg_CommentSingle') | let g:pdv_cfg_CommentSingle = "//" | endif
 if !exists('g:pdv_cfg_FuncCommentEnd') | let g:pdv_cfg_FuncCommentEnd = " // End function" | endif
@@ -350,7 +351,7 @@ func! PhpDocFunc()
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 		" added folding
 		exe l:txtBOL . g:pdv_cfg_Comment1 . funcname . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
 
 	while (l:parameters != ",") && (l:parameters != "")
 		" Save 1st parameter
@@ -371,7 +372,7 @@ func! PhpDocFunc()
         if l:paramtype != ""
             let l:paramtype = " " . l:paramtype
         endif
-		exe l:txtBOL . g:pdv_cfg_Commentn . "@param" . l:paramtype . " $" . l:paramname . " " . g:pdv_cfg_EOL
+		exe l:txtBOL . g:pdv_cfg_Commentn . "@param" . l:paramtype . " $" . l:paramname . "" . g:pdv_cfg_EOL
 	endwhile
 
 	if l:static != ""
@@ -430,7 +431,7 @@ func! PhpDocVar()
 	
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 	exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
     if l:static != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@static" . g:pdv_cfg_EOL
     endif
@@ -476,7 +477,7 @@ func! PhpDocConst()
 	
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 	exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
     exe l:txtBOL . g:pdv_cfg_Commentn . "@const " . l:type . g:pdv_cfg_EOL
 	
     " Close the comment block.
@@ -520,7 +521,7 @@ func! PhpDocClass()
 	
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 	exe l:txtBOL . g:pdv_cfg_Comment1 . l:classname . " " . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
     if l:extends != "" && l:extends != "implements"
     	exe l:txtBOL . g:pdv_cfg_Commentn . "@uses " . l:extends . g:pdv_cfg_EOL
     endif
@@ -619,7 +620,7 @@ func! PhpDocDefault()
     let l:txtBOL = g:pdv_cfg_BOL . indent
 
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . " " . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_CommentBlank . " " . g:pdv_cfg_EOL
 	
     " Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
