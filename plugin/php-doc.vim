@@ -333,6 +333,7 @@ func! PhpDocFunc()
 	
 	let l:modifier = substitute (l:name, g:pdv_re_func, '\1', "g")
 	let l:funcname = substitute (l:name, g:pdv_re_func, '\2', "g")
+	let l:funcname = substitute (l:funcname, '__construct', 'Constructor', "g") " Rename constructors
 	let l:parameters = substitute (l:name, g:pdv_re_func, '\3', "g") . ","
 	let l:params = substitute (l:name, g:pdv_re_func, '\3', "g") 
 	let l:params = substitute (l:params, '[$  ]', '', "g")
@@ -387,7 +388,9 @@ func! PhpDocFunc()
     if l:scope != ""
     	exe l:txtBOL . g:pdv_cfg_Commentn . "@access " . l:scope . g:pdv_cfg_EOL
     endif
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
+	if l:funcname != "Constructor"
+		exe l:txtBOL . g:pdv_cfg_Commentn . "@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
+	endif
 
 	" Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
