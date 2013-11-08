@@ -154,7 +154,7 @@ let g:pdv_re_attribute = '^\s*\(\(private\|public\|protected\|var\|static\)\+\)\
 let g:pdv_re_const = '^\s*\(\(const\)\+\)\s*\([^ ;=]\+\)[ =]*\(.*\);\?$'
 
 " [:spacce:]*(abstract|final|)[:space:]*(class|interface|trait)+[:space:]+\(extends ([:identifier:])\)?[:space:]*\(implements ([:identifier:][, ]*)+\)?
-let g:pdv_re_class = '^\s*\([a-zA-Z]*\)\s*\(interface\|class\|trait\)\s*\([^ ]\+\)\s*\(extends\)\?\s*\([a-zA-Z0-9]*\)\?\s*\(implements*\)\? *\([a-zA-Z0-9_ ,]*\)\?.*$'
+let g:pdv_re_class = '^\s*\([a-zA-Z]*\)\s*\(interface\|class\|trait\)\s*\([^ ]\+\)\s*\(extends\)\?\s*\([a-zA-Z0-9_]*\)\?\s*\(implements*\)\? *\([a-zA-Z0-9_ ,]*\)\?.*$'
 
 let g:pdv_re_array  = "^array *(.*"
 let g:pdv_re_int    = '^[0-9]\+'
