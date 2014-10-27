@@ -438,7 +438,7 @@ func! PhpDocVar()
     if l:static != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@static" . g:pdv_cfg_EOL
     endif
-    exe l:txtBOL . g:pdv_cfg_Commentn . "@var " . l:type . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_Commentn . "@type " . l:type . g:pdv_cfg_EOL
     if l:scope != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@access " . l:scope . g:pdv_cfg_EOL
     endif
@@ -481,7 +481,7 @@ func! PhpDocConst()
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 	exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
     exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . "@const " . l:type . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_Commentn . "@type " . l:type . g:pdv_cfg_EOL
 	
     " Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
