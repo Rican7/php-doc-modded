@@ -299,7 +299,9 @@ endfunc
 " {{{ PhpDocClassEnd()
 func! PhpDocClassEnd(classtype, classname)
 
-	call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
+    if g:pdv_cfg_FuncCommentEnd
+        call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
+    endif
 endfunc
 " }}}
 " {{{ PhpDocClassEndAuto()
