@@ -543,11 +543,21 @@ func! PhpDocClass()
 	if l:final != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@final" . g:pdv_cfg_EOL
     endif
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@package " . g:pdv_cfg_Package . g:pdv_cfg_EOL
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@version " . g:pdv_cfg_Version . g:pdv_cfg_EOL
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@copyright " . g:pdv_cfg_Copyright . g:pdv_cfg_EOL
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@author " . g:pdv_cfg_Author . g:pdv_cfg_EOL
-	exe l:txtBOL . g:pdv_cfg_Commentn . "@license " . g:pdv_cfg_License . g:pdv_cfg_EOL
+    if g:pdv_cfg_Package != ""
+	    exe l:txtBOL . g:pdv_cfg_Commentn . "@package " . g:pdv_cfg_Package . g:pdv_cfg_EOL
+    endif
+    if g:pdv_cfg_Version != ""
+	    exe l:txtBOL . g:pdv_cfg_Commentn . "@version " . g:pdv_cfg_Version . g:pdv_cfg_EOL
+    endif
+    if g:pdv_cfg_Copyright != ""
+	    exe l:txtBOL . g:pdv_cfg_Commentn . "@copyright " . g:pdv_cfg_Copyright . g:pdv_cfg_EOL
+    endif
+    if g:pdv_cfg_Author != ""
+	    exe l:txtBOL . g:pdv_cfg_Commentn . "@author " . g:pdv_cfg_Author . g:pdv_cfg_EOL
+    endif
+    if g:pdv_cfg_License != ""
+	    exe l:txtBOL . g:pdv_cfg_Commentn . "@license " . g:pdv_cfg_License . g:pdv_cfg_EOL
+    endif
 
 	" Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
