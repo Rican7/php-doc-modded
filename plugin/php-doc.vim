@@ -282,24 +282,23 @@ endfunc
 
 " {{{ PhpDocFuncEnd()
 func! PhpDocFuncEnd()
-
-	call setline(line('.'), getline('.') . g:pdv_cfg_FuncCommentEnd)
+	if g:pdv_cfg_FuncCommentEnd != ""
+		call setline(line('.'), getline('.') . g:pdv_cfg_FuncCommentEnd)
+	endif
 endfunc
 " }}}
 " {{{ PhpDocFuncEndAuto()
 func! PhpDocFuncEndAuto(funcname)
-
 	call search('{')
 	call searchpair('{', '', '}')
-	call setline(line('.'), getline('.') . g:pdv_cfg_FuncCommentEnd . ' ' . a:funcname)
+	return PhpDocFuncEnd()
 
 endfunc
 " }}}
 
 " {{{ PhpDocClassEnd()
 func! PhpDocClassEnd(classtype, classname)
-
-    if g:pdv_cfg_FuncCommentEnd
+    if g:pdv_cfg_ClassCommentEnd
         call setline(line('.'), getline('.') . g:pdv_cfg_ClassCommentEnd . ' ' . a:classtype . ' ' . a:classname)
     endif
 endfunc
