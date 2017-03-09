@@ -173,8 +173,8 @@ let g:pdv_cfg_EOL = ""
 
 " }}}
 
- " {{{ PhpDocSingle()
- " Document a single line of code ( does not check if doc block already exists )
+" {{{ PhpDocSingle()
+" Document a single line of code ( does not check if doc block already exists )
 
 func! PhpDocSingle()
     let l:endline = line(".") + 1
@@ -183,10 +183,10 @@ func! PhpDocSingle()
 endfunc
 
 " }}}
- " {{{ PhpDocRange()
- " Documents a whole range of code lines ( does not add defualt doc block to
- " unknown types of lines ). Skips elements where a docblock is already
- " present.
+" {{{ PhpDocRange()
+" Documents a whole range of code lines ( does not add defualt doc block to
+" unknown types of lines ). Skips elements where a docblock is already
+" present.
 func! PhpDocRange() range
     let l:line = a:firstline
     let l:endLine = a:lastline
@@ -207,7 +207,7 @@ func! PhpDocRange() range
     endwhile
 endfunc
 
- " }}}
+" }}}
 " {{{ PhpDocFold()
 
 " func! PhpDocFold(name)
@@ -357,11 +357,11 @@ func! PhpDocFunc()
     " Local indent
     let l:txtBOL = g:pdv_cfg_BOL . l:indent
 
-        " exec l:txtBOL . "// " . l:scope ." ".  funcname . "(" . l:params . ") {{" . "{ " . g:pdv_cfg_EOL
+    " exec l:txtBOL . "// " . l:scope ." ".  funcname . "(" . l:params . ") {{" . "{ " . g:pdv_cfg_EOL
 
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
-        " added folding
-        exe l:txtBOL . g:pdv_cfg_Comment1 . funcname . g:pdv_cfg_EOL
+    " added folding
+    exe l:txtBOL . g:pdv_cfg_Comment1 . funcname . g:pdv_cfg_EOL
     exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
 
     while (l:parameters != ",") && (l:parameters != "")
@@ -413,7 +413,7 @@ func! PhpDocFunc()
 endfunc
 
 " }}}
- " {{{  PhpDocVar()
+" {{{  PhpDocVar()
 
 func! PhpDocVar()
     " Line for the comment to begin
@@ -459,7 +459,7 @@ func! PhpDocVar()
 endfunc
 
 " }}}
- " {{{  PhpDocConst()
+" {{{  PhpDocConst()
 
 func! PhpDocConst()
     " Line for the comment to begin
@@ -573,7 +573,7 @@ endfunc
 " {{{ PhpDocScope()
 
 func! PhpDocScope(modifiers, identifier)
-" exe g:pdv_cfg_BOL . DEBUG: . a:modifiers . g:pdv_cfg_EOL
+    " exe g:pdv_cfg_BOL . DEBUG: . a:modifiers . g:pdv_cfg_EOL
     let l:scope  = ""
     if  matchstr (a:modifiers, g:pdv_re_scope) != ""
         if g:pdv_cfg_php4always == 1
