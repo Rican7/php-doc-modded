@@ -105,6 +105,9 @@ if !exists('g:pdv_cfg_License') | let g:pdv_cfg_License = "PHP Version 5.4 {@lin
 
 if !exists('g:pdv_cfg_ReturnVal') | let g:pdv_cfg_ReturnVal = "void" | endif
 
+" Wether to create tags for class docs or not
+if !exists('g:pdv_cfg_createClassTags') | let g:pdv_cfg_createClassTags = 1 | endif
+
 " Wether to create @uses tags for implementation of interfaces and inheritance
 if !exists('g:pdv_cfg_Uses') | let g:pdv_cfg_Uses = 1 | endif
 
@@ -262,7 +265,11 @@ func! PhpDoc()
         let l:result = PhpDocConst()
 
     elseif l:line =~ g:pdv_re_class
-        let l:result = PhpDocClass()
+        if g:pdv_cfg_createClassTags == 1
+            let l:result = PhpDocClass()
+        else
+            let l:result = PhpDocDefault()
+        endif
 
  
 		else
