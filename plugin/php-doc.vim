@@ -80,8 +80,6 @@
 
 
 
-if has ("user_commands")
-
 " {{{ Globals
 
 " After phpDoc standard
@@ -642,5 +640,3 @@ func! PhpDocDefault()
 endfunc
 
 " }}}
-
-endif " user_commands
