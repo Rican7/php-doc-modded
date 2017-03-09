@@ -146,7 +146,9 @@ let g:pdv_re_abstract = '\(abstract\)'
 let g:pdv_re_final = '\(final\)'
 
 " [:space:]*(private|protected|public|static|abstract)*[:space:]+[:identifier:]+\([:params:]\)[:space:]*:[:space:]*[:return_type:]+
-let g:pdv_re_func = '^\s*\([a-zA-Z ]*\)function\s\+\([^ (]\+\)\s*(\s*\(.*\)\s*)\s*:\?\s*\([^ ]\+\)\?[{;]\?$'
+let g:pdv_re_func = '^\s*\([a-zA-Z ]*\)function\s\+\([^ (]\+\)\s*(\_s*\(\%([^)]\|\_s\)*\)\_s*)\s*:\?\s*\([^ {]*\)\s*[{;]\?}\?$'
+let g:pdv_re_func_sigstart = '^\s*\%([a-zA-Z ]*\)function\s\+\%([^ (]\+\)\s*('
+let g:pdv_re_func_sigend = '[{;]}\?$'
 let g:pdv_re_funcend = '^\s*}$'
 " [:typehint:]*[:space:]*$[:identifier]\([:space:]*=[:space:]*[:value:]\)?
 let g:pdv_re_param = ' *\([^ &]*\) *&\?\$\([A-Za-z_][A-Za-z0-9_]*\) *=\? *\(.*\)\?$'
@@ -248,10 +250,11 @@ func! PhpDoc()
     let &g:paste = g:pdv_cfg_paste == 1 ? 1 : &g:paste
 
     let l:line = getline(".")
+    let l:func_term = search(g:pdv_re_func_sigend, 'n')
     let l:result = ""
 
-    if l:line =~ g:pdv_re_func
-        let l:result = PhpDocFunc()
+    if l:line =~ g:pdv_re_func_sigstart
+        let l:result = PhpDocFunc(l:func_term)
 
     elseif l:line =~ g:pdv_re_funcend
         let l:result = PhpDocFuncEnd()
@@ -315,11 +318,17 @@ endfunc
 
 " {{{  PhpDocFunc()
 
-func! PhpDocFunc()
+func! PhpDocFunc(end_line)
     " Line for the comment to begin
     let commentline = line (".") - 1
 
-    let l:name = substitute (getline ("."), '^\(.*\)\/\/.*$', '\1', "")
+    let l:line = getline(".")
+
+    if 0 < a:end_line
+        let l:line = join(getline(line('.'), a:end_line), ' ')
+    endif
+
+    let l:name = substitute (l:line, '^\(.*\)\/\/.*$', '\1', "")
 
     "exe g:pdv_cfg_BOL . "DEBUG:" . name. g:pdv_cfg_EOL
 
