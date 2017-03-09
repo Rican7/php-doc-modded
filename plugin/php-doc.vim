@@ -93,6 +93,7 @@ if !exists('g:pdv_cfg_CommentTail') | let g:pdv_cfg_CommentTail = " */" | endif
 if !exists('g:pdv_cfg_CommentSingle') | let g:pdv_cfg_CommentSingle = "//" | endif
 if !exists('g:pdv_cfg_FuncCommentEnd') | let g:pdv_cfg_FuncCommentEnd = " // End function" | endif
 if !exists('g:pdv_cfg_ClassCommentEnd') | let g:pdv_cfg_ClassCommentEnd = " // End" | endif
+if !exists('g:pdv_cfg_VariableTypeTag') | let g:pdv_cfg_VariableTypeTag = "@var" | endif
 
 " Default values
 if !exists('g:pdv_cfg_Type') | let g:pdv_cfg_Type = "mixed" | endif
@@ -438,7 +439,7 @@ func! PhpDocVar()
     if l:static != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@static" . g:pdv_cfg_EOL
     endif
-    exe l:txtBOL . g:pdv_cfg_Commentn . "@type " . l:type . g:pdv_cfg_EOL
+    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_VariableTypeTag . " " . l:type . g:pdv_cfg_EOL
     if l:scope != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@access " . l:scope . g:pdv_cfg_EOL
     endif
@@ -481,8 +482,8 @@ func! PhpDocConst()
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
 	exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
     exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Commentn . "@type " . l:type . g:pdv_cfg_EOL
-	
+    exe l:txtBOL . g:pdv_cfg_Commentn . g:pdv_cfg_VariableTypeTag . " " . l:type . g:pdv_cfg_EOL
+
     " Close the comment block.
 	exe l:txtBOL . g:pdv_cfg_CommentTail . g:pdv_cfg_EOL
 	return l:modifier ." ". l:varname
