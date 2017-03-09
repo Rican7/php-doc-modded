@@ -274,10 +274,6 @@ func! PhpDoc()
 
     endif
 
-"   if g:pdv_cfg_folds == 1
-"       PhpDocFolds(l:result)
-"   endif
-
     let &g:paste = l:paste
 
     return l:result
