@@ -147,8 +147,8 @@ let g:pdv_re_abstract = '\(abstract\)'
 " (final)
 let g:pdv_re_final = '\(final\)'
 
-" [:space:]*(private|protected|public|static|abstract)*[:space:]+[:identifier:]+\([:params:]\)
-let g:pdv_re_func = '^\s*\([a-zA-Z ]*\)function\s\+\([^ (]\+\)\s*(\s*\(.*\)\s*)\s*[{;]\?$'
+" [:space:]*(private|protected|public|static|abstract)*[:space:]+[:identifier:]+\([:params:]\)[:space:]*:[:space:]*[:return_type:]+
+let g:pdv_re_func = '^\s*\([a-zA-Z ]*\)function\s\+\([^ (]\+\)\s*(\s*\(.*\)\s*)\s*:\?\s*\([^ ]\+\)\?[{;]\?$'
 let g:pdv_re_funcend = '^\s*}$'
 " [:typehint:]*[:space:]*$[:identifier]\([:space:]*=[:space:]*[:value:]\)?
 let g:pdv_re_param = ' *\([^ &]*\) *&\?\$\([A-Za-z_][A-Za-z0-9_]*\) *=\? *\(.*\)\?$'
@@ -349,7 +349,12 @@ func! PhpDocFunc()
     let l:static = g:pdv_cfg_php4always == 1 ? matchstr(l:modifier, g:pdv_re_static) : ""
 	let l:abstract = g:pdv_cfg_php4always == 1 ? matchstr(l:modifier, g:pdv_re_abstract) : ""
 	let l:final = g:pdv_cfg_php4always == 1 ? matchstr(l:modifier, g:pdv_re_final) : ""
-    
+    let l:returnType = substitute (l:name, g:pdv_re_func, '\4', "g")
+
+    if l:returnType == ""
+        let l:returnType = g:pdv_cfg_ReturnVal
+    endif
+
     exe "norm! " . commentline . "G$"
     
     " Local indent
@@ -397,7 +402,7 @@ func! PhpDocFunc()
     	exe l:txtBOL . g:pdv_cfg_Commentn . "@access " . l:scope . g:pdv_cfg_EOL
     endif
 	if l:funcname != "Constructor"
-		exe l:txtBOL . g:pdv_cfg_Commentn . "@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
+		exe l:txtBOL . g:pdv_cfg_Commentn . "@return " . l:returnType . g:pdv_cfg_EOL
 	endif
 
 	" Close the comment block.
