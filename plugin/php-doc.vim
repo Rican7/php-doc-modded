@@ -90,6 +90,7 @@ if !exists('g:pdv_cfg_CommentBlank') | let g:pdv_cfg_CommentBlank = " *" | endif
 if !exists('g:pdv_cfg_CommentTail') | let g:pdv_cfg_CommentTail = " */" | endif
 if !exists('g:pdv_cfg_CommentSingle') | let g:pdv_cfg_CommentSingle = "//" | endif
 if !exists('g:pdv_cfg_InsertFuncName') | let g:pdv_cfg_InsertFuncName = 1 | endif
+if !exists('g:pdv_cfg_InsertVarName') | let g:pdv_cfg_InsertVarName = 1 | endif
 if !exists('g:pdv_cfg_FuncCommentEnd') | let g:pdv_cfg_FuncCommentEnd = " // End function" | endif
 if !exists('g:pdv_cfg_ClassCommentEnd') | let g:pdv_cfg_ClassCommentEnd = " // End" | endif
 if !exists('g:pdv_cfg_VariableTypeTag') | let g:pdv_cfg_VariableTypeTag = "@var" | endif
@@ -458,8 +459,11 @@ func! PhpDocVar()
     let l:txtBOL = g:pdv_cfg_BOL . l:indent
 
     exe l:txtBOL . g:pdv_cfg_CommentHead . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
-    exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
+
+    if g:pdv_cfg_InsertVarName == 1
+        exe l:txtBOL . g:pdv_cfg_Comment1 . l:varname . " " . g:pdv_cfg_EOL
+        exe l:txtBOL . g:pdv_cfg_CommentBlank . g:pdv_cfg_EOL
+    endif
     if l:static != ""
         exe l:txtBOL . g:pdv_cfg_Commentn . "@static" . g:pdv_cfg_EOL
     endif
